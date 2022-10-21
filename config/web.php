@@ -10,15 +10,15 @@ $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
 
 $config = [
-    'id' => 'basic',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
-    'language' => 'ru',
-    'aliases' => [
+    'id'         => 'basic',
+    'basePath'   => dirname(__DIR__),
+    'bootstrap'  => [ 'log' ],
+    'language'   => 'ru',
+    'aliases'    => [
         '@bower' => '@vendor/bower-asset',
-        '@npm' => '@vendor/npm-asset',
+        '@npm'   => '@vendor/npm-asset',
     ],
-    'modules' => [
+    'modules'    => [
 //        'redactor' => [
 //            'class' => 'yii\redactor\RedactorModule',
 //            'uploadDir' => '@vendor/carono/yii2-1c-exchange/files/articles',
@@ -31,70 +31,73 @@ $config = [
 //            }
 //        ],
         'exchange' => [
-            'class' => 'carono\exchange1c\ExchangeModule',
-            'auth' => function ($username, $password) {
-                return $username == 'admin' && $password == 'admin';
+            'class'             => 'carono\exchange1c\ExchangeModule',
+            'auth'              => function ($username, $password) {
+                return $username == 'admin' && $password == 'admin' ? User::findByUsername('admin') : false;
             },
-            'productClass' => Product::class,
-            'documentClass' => Order::class,
-            'groupClass' => Group::class,
-            'offerClass' => Offer::class,
-            'partnerClass' => User::class,
+            'productClass'      => Product::class,
+            'documentClass'     => Order::class,
+            'groupClass'        => Group::class,
+            'offerClass'        => Offer::class,
+            'partnerClass'      => User::class,
             'exchangeDocuments' => true,
-            'debug' => true,
-            'bootstrapUrlRule' => true,
+            'debug'             => true,
+            'bootstrapUrlRule'  => true,
         ],
     ],
     'components' => [
-        'request' => [
+        'request'      => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'JGAbCmLDtMMCqsJeRpmF7WeKmnzsLXLM',
         ],
-        'cache' => [
+        'cache'        => [
             'class' => 'yii\caching\FileCache',
         ],
-        'i18n' => [
+        'i18n'         => [
             'translations' => [
                 '*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@app/messages',
+                    'class'          => 'yii\i18n\PhpMessageSource',
+                    'basePath'       => '@app/messages',
                     'sourceLanguage' => 'en',
                 ],
             ],
         ],
-        'user' => [
-            'identityClass' => 'app\models\User',
+        'user'         => [
+            'identityClass'   => 'app\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+        'mailer'       => [
+            'class'            => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
-        'log' => [
+        'log'          => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'targets'    => [
                 [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'class'  => 'yii\log\FileTarget',
+                    'levels' => [
+                        'error',
+                        'warning'
+                    ],
                 ],
             ],
         ],
-        'db' => $db,
-        'urlManager' => [
+        'db'           => $db,
+        'urlManager'   => [
             'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
+            'showScriptName'  => false,
+            'rules'           => [
                 'images/<id>/<name>' => 'site/image',
             ],
         ],
     ],
-    'params' => $params,
+    'params'     => $params,
 ];
 
 if (YII_ENV_DEV) {
