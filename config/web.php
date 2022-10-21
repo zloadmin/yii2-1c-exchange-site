@@ -86,6 +86,7 @@ $config = [
                         'warning'
                     ],
                     'exportInterval' => 1,
+                    'except' => ['yii\web\HttpException:404'],
                 ],
             ],
         ],
