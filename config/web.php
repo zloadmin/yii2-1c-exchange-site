@@ -32,13 +32,17 @@ $config = [
 //        ],
         'exchange' => [
             'class' => 'carono\exchange1c\ExchangeModule',
+            'auth' => function ($username, $password) {
+                return $username == 'admin' && $password == 'admin';
+            },
             'productClass' => Product::class,
             'documentClass' => Order::class,
             'groupClass' => Group::class,
             'offerClass' => Offer::class,
             'partnerClass' => User::class,
             'exchangeDocuments' => true,
-            'debug' => true
+            'debug' => true,
+            'bootstrapUrlRule' => true,
         ],
     ],
     'components' => [
