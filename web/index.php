@@ -8,10 +8,10 @@
     defined('YII_ENV') or define('YII_ENV', 'dev');
 //}
 
-Yii::getLogger()->autoFlush = 1;
+//Yii::getLogger()->autoFlush = 1;
 // when sending a message to log routes, also notify them to dump the message
 // into the corresponding persistent storage (e.g. DB, email)
-Yii::getLogger()->autoDump = true;
+//Yii::getLogger()->autoDump = true;
 
 require(__DIR__ . '/../vendor/autoload.php');
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
