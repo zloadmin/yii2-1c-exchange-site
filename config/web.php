@@ -33,7 +33,6 @@ $config = [
         'exchange' => [
             'class'             => 'carono\exchange1c\ExchangeModule',
             'auth'              => function ($username, $password) {
-    return true;
                 return $username == 'admin' && $password == 'admin' ? User::findByUsername('admin') : false;
             },
             'productClass'      => Product::class,
