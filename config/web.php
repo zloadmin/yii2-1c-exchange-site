@@ -86,6 +86,7 @@ $config = [
                         'error',
                         'warning'
                     ],
+                    'exportInterval' => 1,
                 ],
             ],
         ],
